@@ -11,7 +11,6 @@ import { Store } from '../store'
 import { connect } from 'react-redux'
 import * as filterAction from './../store/filter/filter.action'
 import { FilterState, GenderValue } from '../store/filter/filter.reducer'
-import { filterUserList } from './../store/filter/filter.action'
 
 
 interface Props {
@@ -139,7 +138,7 @@ const mapDispatchToProps = dispatch => ({
     setMaxAge: (maxAge: number) => dispatch(filterAction.setMaxAge(maxAge)),
     setGender: (gender: number) => dispatch(filterAction.setGender(gender)), 
     setToDefault: () => dispatch(filterAction.setDefaultValue()),
-    find: (filterValues) => dispatch(filterUserList(filterValues)),
+    find: (filterValues) => dispatch(filterAction.filterUserList(filterValues)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent)

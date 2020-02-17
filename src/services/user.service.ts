@@ -2,7 +2,7 @@ import Axios, { AxiosResponse } from 'axios'
 import ResponseWithUser from '../interfaces/response.interface'
 import User from '../interfaces/user.interface'
 
-class UserService {
+export class UserService {
     private url = 'https://gorest.co.in/public-api/users?_format=json&access-token=7-aPNfhriISxZtBDLZR5tcyF4RlhYPWr97wm'
     public userList: User[]
 
@@ -20,13 +20,21 @@ class UserService {
         return this.userList
     }
 
-    public divideUserForSection() {
+    public divideUserForSection(users = this.userList) {
         const sectionName = new Set()
         let section = [];
         
         if (!this.userList) {this.userList = []; }
 
-        this.getAllUsers().forEach(user => {
+        this.getAllUsers()
+        .sort((user1, user2) => {
+            return user1.first_name < user2.first_name
+            ? -1
+            : user1.first_name > user2.first_name
+            ? 1
+            : 0
+        })
+        .forEach(user => {
             sectionName.add(user.first_name.charAt(0))  
         })
 
@@ -43,4 +51,6 @@ class UserService {
     }
 }
 
-export default new UserService()
+const userService = new UserService()
+
+export default userService 
