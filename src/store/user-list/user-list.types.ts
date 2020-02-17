@@ -1,0 +1,2 @@
+export const UPDATE_USER_LIST = 'UPDATE_USER_LIST'
+export const DELETE_USER = 'DELETE_USER'
