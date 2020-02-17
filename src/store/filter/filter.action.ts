@@ -2,10 +2,11 @@ import store from ".."
 import * as filterTypes from "./filter.types"
 import { updateUserList, getAllUsers } from "../user-list/user-list.action"
 import { FilterState, GenderValue, initialState } from "./filter.reducer"
+import userService from "../../services/user.service"
 
 export const filterUserList = ({name, age, gender}: FilterState) => {
     return dispatch => {
-        const userList = store.getState().users.users.slice()
+        const userList = userService.getAllUsers()
         let filteredUserList = userList
         .filter((user) => {
             return name.length > 2

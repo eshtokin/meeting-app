@@ -2,11 +2,11 @@ import React from 'react'
 import { View, Text, Image, StyleSheet} from 'react-native'
 import User from '../interfaces/user.interface'
 
-interface UserProps {
+interface Props {
     user: User;
 }
 
-const UserComponent: React.FC<UserProps> = ({user}) => {
+const UserComponent: React.FC<Props> = ({user}) => {
 
     const calculateYears = () => {
         const today = new Date().getFullYear();

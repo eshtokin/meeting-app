@@ -7,9 +7,6 @@ import {
     TextInput,
     Picker,
 } from 'react-native'
-import { Store } from '../store'
-import { connect } from 'react-redux'
-import * as filterAction from './../store/filter/filter.action'
 import { FilterState, GenderValue } from '../store/filter/filter.reducer'
 
 
@@ -127,18 +124,4 @@ const styles = StyleSheet.create({
     }
 })
 
-
-const mapStateToProps = (state: Store) => ({
-    filter: state.filter
-})
-
-const mapDispatchToProps = dispatch => ({
-    setName: (name: string) => dispatch(filterAction.setName(name)),
-    setMinAge: (minAge: number) => dispatch(filterAction.setMinAge(minAge)),
-    setMaxAge: (maxAge: number) => dispatch(filterAction.setMaxAge(maxAge)),
-    setGender: (gender: number) => dispatch(filterAction.setGender(gender)), 
-    setToDefault: () => dispatch(filterAction.setDefaultValue()),
-    find: (filterValues) => dispatch(filterAction.filterUserList(filterValues)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterComponent)
+export default FilterComponent

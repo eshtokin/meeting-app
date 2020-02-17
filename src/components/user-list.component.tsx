@@ -52,17 +52,4 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = (store: Store) => ({
-   ...store.users
-})
-
-const mapDispatchToProps = dispatch => ({
-    openCloseAccepted: (user) => {
-        dispatch(chooseUser(user))
-        dispatch(openCloseAcceptedModal())
-    },
-    tryr: () => dispatch(setDefaultValue()),
-    getUserList: () => dispatch(getAllUsers())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserListComponent)
+export default UserListComponent

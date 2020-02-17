@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, SafeAreaView, Modal, Text, Alert, Button, TouchableOpacity } from 'react-native'
-import UserListComponent from './src/components/user-list.component'
-import FilterComponent from './src/components/filter.component';
-import { Provider, connect } from 'react-redux'
+import React from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native'
+import { Provider } from 'react-redux'
 import store from './src/store/index'
-import AcceptModalComponent from './src/components/modal.component'
-import { getAllUsers } from './src/store/user-list/user-list.action';
-import userService from './src/services/user.service';
+import ModalComponent from './src/components/modal.component'
+import FilterContainer from './src/containers/filter.container';
+import UserListContainer from './src/containers/user-list.container';
 
 const Application = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <FilterComponent />
-      <UserListComponent />
-      <AcceptModalComponent />
+      <FilterContainer />
+      <UserListContainer />
+      <ModalComponent />
     </SafeAreaView>
   );
 }
