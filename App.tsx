@@ -6,12 +6,9 @@ import { Provider, connect } from 'react-redux'
 import store from './src/store/index'
 import AcceptModalComponent from './src/components/modal.component'
 import { getAllUsers } from './src/store/user-list/user-list.action';
+import userService from './src/services/user.service';
 
-const Application = ({getUserList}) => {
-  useEffect(() => {
-    getUserList()
-  }, []);
-
+const Application = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FilterComponent />
@@ -20,12 +17,6 @@ const Application = ({getUserList}) => {
     </SafeAreaView>
   );
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  getUserList: () => dispatch(getAllUsers())
-})
-
-const ApplicationWithDispatch = connect(null, mapDispatchToProps)(Application)
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +29,7 @@ const styles = StyleSheet.create({
 
 const  App = () => (
   <Provider store={store}>
-    <ApplicationWithDispatch />
+    <Application />
   </Provider>
 )
 

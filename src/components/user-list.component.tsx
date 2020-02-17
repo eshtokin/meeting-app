@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity, SectionList, Text, StyleSheet } from 'react-native'
 import User from '../interfaces/user.interface'
 import UserComponent from './user.component'
@@ -6,31 +6,22 @@ import { connect } from 'react-redux'
 import { openCloseAcceptedModal } from './../store/modals/modals.action'
 import { chooseUser } from './../store/choosen-user/choosen-user.action'
 import { Store } from '../store'
+import userService from '../services/user.service'
+import { getAllUsers } from '../store/user-list/user-list.action'
 
 interface Props {
-    users: User[]
     openCloseAccepted: (user: User) => void
+    getUserList: () => void
 }
 
 const UserListComponent: React.FC<Props> = (props) => {
-    const {users, openCloseAccepted} = props
-    
-    const sectionName = new Set()
-    let section = [];
-    if (users.length > 0) {
-        users.forEach(user => {
-            sectionName.add(user.first_name.charAt(0))  
-        })
-        sectionName.forEach(l => {
-            section.push({
-                title: l,
-                data: users.map(user => {
-                    return user.first_name.charAt(0) === l ? user : null
-                }).filter(user => user !== null)
-            })
-        })
-    }
+    const { openCloseAccepted, getUserList} = props
+    useEffect(() => {
+        setTimeout(() => {getUserList()}, 410)
+    }, []);
 
+    const section = userService.divideUserForSection()
+    
     return (
         <SectionList
         sections={section}
@@ -64,7 +55,8 @@ const mapDispatchToProps = dispatch => ({
     openCloseAccepted: async (user) => {
         await dispatch(chooseUser(user))
         await dispatch(openCloseAcceptedModal())
-    }
+    },
+    getUserList: () => dispatch(getAllUsers())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListComponent)

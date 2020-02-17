@@ -1,19 +1,19 @@
 import store from ".."
 import User from "../../interfaces/user.interface"
 import * as userListTypes from "./user-list.types"
-import ServerResponse from "../../services/server-response"
+import userService from "../../services/user.service"
 
 export const updateUserList = (userList: User[]) => {
-    userList.sort((user1, user2) => {
-        return user1.first_name < user2.first_name
-        ? -1
-        : user1.first_name > user2.first_name
-        ? 1
-        : 0
-    })
-
     return async dispatch => {
         setTimeout(() => {
+            userList.sort((user1, user2) => {
+                return user1.first_name < user2.first_name
+                ? -1
+                : user1.first_name > user2.first_name
+                ? 1
+                : 0
+            })
+            
             dispatch({
                 type: userListTypes.UPDATE_USER_LIST,
                 payload: userList
@@ -24,8 +24,10 @@ export const updateUserList = (userList: User[]) => {
 
 export const getAllUsers = () => {
     return async dispatch => {
-        setTimeout(() => {
-            dispatch(updateUserList(ServerResponse.result))
+        await setTimeout(() => {
+            // dispatch(updateUserList(ServerResponse.result))
+            dispatch(updateUserList(userService.getAllUsers()))
+
         }, 400)
     }
 }
