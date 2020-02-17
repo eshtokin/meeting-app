@@ -14,7 +14,10 @@ export const updateUserList = (userList: User[]) => {
 
 export const getAllUsers = () => {
     return dispatch => {
-        dispatch(updateUserList(userService.getAllUsers()))
+        setTimeout(() => {
+            dispatch(updateUserList(userService.getAllUsers()))
+        }, 400);
+        
     }
 }
 

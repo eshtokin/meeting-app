@@ -20,35 +20,6 @@ export class UserService {
         return this.userList
     }
 
-    public divideUserForSection(users = this.userList) {
-        const sectionName = new Set()
-        let section = [];
-        
-        if (!this.userList) {this.userList = []; }
-
-        this.getAllUsers()
-        .sort((user1, user2) => {
-            return user1.first_name < user2.first_name
-            ? -1
-            : user1.first_name > user2.first_name
-            ? 1
-            : 0
-        })
-        .forEach(user => {
-            sectionName.add(user.first_name.charAt(0))  
-        })
-
-        sectionName.forEach(l => {
-            section.push({
-                title: l,
-                data: this.getAllUsers().map(user => {
-                    return user.first_name.charAt(0) === l ? user : null
-                }).filter(user => user !== null)
-            })
-        })
-
-        return section
-    }
 }
 
 const userService = new UserService()

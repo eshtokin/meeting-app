@@ -24,7 +24,9 @@ export const filterUserList = ({name, age, gender}: FilterState) => {
         ? filteredUserList
         : filteredUserList.filter(user => user.gender === GenderValue[gender])
         
-        dispatch(updateUserList(filteredUserList))
+        setTimeout(() => {
+            dispatch(updateUserList(filteredUserList))
+        }, 400)
     }
 }
 
