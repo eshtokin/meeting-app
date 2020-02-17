@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { TouchableOpacity, SectionList, Text, StyleSheet, ScrollView } from 'react-native'
+import React from 'react'
+import { TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native'
 import User from '../interfaces/user.interface'
 import UserComponent from './user.component'
 import { connect } from 'react-redux'
@@ -18,10 +18,6 @@ interface Props {
 const UserListComponent: React.FC<Props> = (props) => {
     const { users, getUserList, openCloseAccepted } = props
 
-    useEffect(() => {
-        getUserList()
-    }, [])
-
     return (
         <ScrollView>
         {
@@ -29,11 +25,32 @@ const UserListComponent: React.FC<Props> = (props) => {
                 <TouchableOpacity onPress={() => openCloseAccepted(user)} key={user.id}>
                     <UserComponent user={user}></UserComponent>
                 </TouchableOpacity>
-            )) : <Text> Click "reset" to downlad list</Text>
+            )) : <TouchableOpacity style={styles.downloadButton} onPress={getUserList}>
+                    <Text style={styles.buttonText}>Show users</Text>
+                </TouchableOpacity>
         }
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    downloadButton: {
+        height: 50,
+        width: 150,
+        marginTop: 200,
+        borderWidth: 2,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'green',
+    },
+    buttonText: {
+        fontSize: 20,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        color: 'green'
+    }
+})
 
 const mapStateToProps = (store: Store) => ({
    ...store.users

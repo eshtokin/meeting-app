@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, Image, StyleSheet} from 'react-native'
 import User from '../interfaces/user.interface'
 
 interface UserProps {

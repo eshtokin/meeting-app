@@ -12,7 +12,7 @@ export interface UserListState {
 }
 
 const initialState = {
-    users: []
+    users: userService.getAllUsers()
 }
 
 const userListReducer = (state: UserListState = initialState, action: UserListAction) => {
